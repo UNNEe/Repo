@@ -24,17 +24,29 @@ def try_colors(graph, num_color):
 
 
 def find_num_color(graph):
-   for num_color in range(len(graph)):
+   for num_color in range(len(graph)+1):
        colors = try_colors(graph,num_color)
        if colors : return colors
 
-graph = {"a":["b","c"],
-        "b":["a","c","d","g"],
-        "c":["a","b","d","e","f"],
-        "d":["c","b","e","g"],
-        "e":["d","c","f","g"],
-        "f":["c","e","g","h"],
-        "g":["b","d","e","f","h"],
-        "h":["f","g"]}
 
+def create_tree():
+    graph = {}
+    print("Create Node:")
+    print("(0 = leave)")
+    while True:
+        inp = input("Node name: ")
+        if inp == "0": break
+        adds = []
+        while True:
+            branch = input("Node %s is connected to: "%inp)
+            if branch == "0":
+                graph[inp] = adds
+                break
+            else: adds.append(branch)
+    return graph
+
+
+graph = create_tree()
+
+print(graph)
 print(find_num_color(graph))
