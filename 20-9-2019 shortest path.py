@@ -1,52 +1,54 @@
-def find_path(origin,destination):
-   if origin == destination :
-        temp = []
-        for h in paths:
-            if all(elem in path for elem in h):
-                return None
-        for n in path:
-           temp.append(n)
-        paths.append(temp)
-        print(path)
-        return path
-   for adjacents in city[origin]:
-        if adjacents not in path:
-            path.append(adjacents)
-            find_path(adjacents,destination)
-            path.pop()
-def Find_Distance(lista):
-    some = 0
-    for n in range(len(lista)-1):
-        num = city.get(lista[n]).index(lista[n + 1])
-        some += value.get(lista[n])[num]
-    return some
-def min_path(PATH):
-    min_path_temp = [1000000000,0]
-    for n in PATH:
-        temp = Find_Distance(n)
-        if temp < min_path_temp[0]:
-            min_path_temp[0],min_path_temp[1]= temp,n
-    return min_path_temp
-paths = []
-path = [1]
+import copy
+
+def create_tree():
+    graph = {}
+    print("0 - cancel")
+
+    while True:
+        node = int(input("Insert node: "))
+        if node == 0 :
+            return graph
+        graph[node] = []
+        while True:
+            try:
+                adjacentes,peso = [int(n) for n in input("Node %s [adjacents/weight]:"%node).split(" ")]
+                graph[node].append([adjacentes,peso])
+                if adjacentes == 0:
+                    break
+            except :
+                break
+
+def shortest(n,soma):
+    if soma+n[1] < path_s[1]: # # verify if current path is shorter than the 'ideal' path aka path_s
+        return True
+    return False
+
+def min_path(origin,destination):
+    global some
+    if origin == destination:  # # verify if the algorithm reached the destination
+        path_s[0] = copy.deepcopy(path)
+        path_s[1] = copy.deepcopy(some)
+    else:
+        for n in city[origin]:
+            if n[0] not in path and shortest(n,some):  # # verify if the current path is shorter than the 'ideal' path
+                path.append(n[0])
+                some += n[1]
+                min_path(n[0],destination)  # # recursive
+                path.pop()
+                some -= n[1]
 
 
-
-city = {1:[2,3],
-       2:[1,3,4],
-       3:[1,2,5],
-       4:[2,5,6,7],
-       5:[3,4],
-       6:[4,7],
-       7:[4,6]}
-value = {1:[3,1],
-       2:[3,4,2],
-       3:[1,4,5],
-       4:[2,1,3,5],
-       5:[5,1],
-       6:[3,2],
-       7:[5,2]}
-
-find_path(1,7)
-print(paths)
-print(min_path(paths))
+city = {1:[[2,3],[3,1]],    # # Change the 'city' graph to whatever you want// or use the 'create_tree' to create one
+       2:[[1,3],[3,3],[4,5]],  # # eg: {node: [[neighbor,distance],[neighbor,distance]]}
+       3:[[1,1],[2,4],[5,5]],  # # node = int number, neighbor = int number, distance = int number
+       4:[[2,2],[5,1],[6,3],[7,5]],
+       5:[[3,5],[4,1]],
+       6:[[4,3],[7,2]],
+       7:[[4,5],[6,2]]}
+inp = [int(n) for n in input("origin/destination:").split()]
+path_s = [[],float("inf")]
+path = [inp[0]]
+some = 0
+min_path(inp[0],inp[1])
+print("min path", path_s[0])
+print("distance", path_s[1])
