@@ -52,7 +52,7 @@ for vertice in list:
 
 # transformar o imperio em um dicionario,
 # "cortar" o imperio em duas partes usando o corte imperio
-# contar a diferença de nodos/adjacentes usando o corte
+# contar a diferenÃ§a de nodos/adjacentes usando o corte
 # contar quantas cidades tem em cada parte com um algoritmo de busca em profundidade
 # adentrar aos reinos
 
