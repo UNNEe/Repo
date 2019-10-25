@@ -10,7 +10,7 @@ def sub_1for(string):
     lenp = len(string)
     n = 0
     p = 0
-    while n < lenp +1:
+    while n < lenp :
         if p == lenp:
             n+= 1
             p = n
