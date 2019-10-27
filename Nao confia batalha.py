@@ -1,3 +1,26 @@
+# this is a code for sea battle game
+
+# input eg:
+# 7 7      <-- board size N x M
+# .#....#  <-- # == ship/fraction of a ship | . == water
+# ###..##  <-- a # adjacent a # is a part of a ship eg: ### = 1 ship
+# .#....#
+# ....#.#
+# .#..#.#
+# .####.#
+# .......
+# 8        <-- number of shots
+# 1 1      <-- places destroyed
+# 1 2
+# 2 1
+# 2 2
+# 2 3
+# 3 2
+# 5 2
+# 6 2
+
+
+
 def create_bf(n,m):
     return tiros(reorganize_bf([[[] for x in range(n)]
             for p in range(m)],m))
